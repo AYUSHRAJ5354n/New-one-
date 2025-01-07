@@ -20,6 +20,7 @@ import asyncio
 import os
 import secrets
 import shutil
+import subprocess
 from glob import glob
 from traceback import format_exc
 
@@ -58,6 +59,21 @@ class Executors:
             rename = await self.anime_info.rename(self.is_original)
             self.output_file = f"encode/{rename}"
             thumb = await self.tools.cover_dl((await self.anime_info.get_poster()))
+
+            # Check file size
+            if os.path.getsize(self.input_file) > 600 * 1024 * 1024:
+                await self.reporter.report_error("File size exceeds 600MB limit.", log=True)
+                return False, "File size exceeds 600MB limit."
+
+            # Use ffmpeg to check resolution
+            cmd = f"ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 {self.input_file}"
+            result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+            width, height = map(int, result.stdout.strip().split('x'))
+            
+            if width > 854 or height > 480:
+                await self.reporter.report_error("Resolution exceeds 480p limit.", log=True)
+                return False, "Resolution exceeds 480p limit."
+
             if self.is_original:
                 await self.reporter.started_renaming()
                 succ, out = await self.tools.rename_file(
