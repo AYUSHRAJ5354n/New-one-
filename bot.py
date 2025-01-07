@@ -1,21 +1,5 @@
-#    This file is part of the AutoAnime distribution.
-#    Copyright (c) 2024 Kaif_00z
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, version 3.
-#
-#    This program is distributed in the hope that it will be useful, but
-#    WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-#    General Public License for more details.
-#
-# License can be found in <
-# https://github.com/kaif-00z/AutoAnimeBot/blob/main/LICENSE > .
-
-# if you are using this following code then don't forgot to give proper
-# credit to t.me/kAiF_00z (github.com/kaif-00z)
-
+from flask import Flask
+from threading import Thread
 from traceback import format_exc
 
 from telethon import Button, events
@@ -31,6 +15,15 @@ from libs.ariawarp import Torrent
 from libs.logger import LOGS, Reporter
 from libs.subsplease import SubsPlease
 
+app = Flask(__name__)
+
+@app.route('/health')
+def health_check():
+    return "OK"
+
+def run_server():
+    app.run(host="0.0.0.0", port=8000)
+
 tools = Tools()
 tools.init_dir()
 bot = Bot()
@@ -39,7 +32,6 @@ subsplease = SubsPlease(dB)
 torrent = Torrent()
 schedule = ScheduleTasks(bot)
 admin = AdminUtils(dB, bot)
-
 
 @bot.on(
     events.NewMessage(
@@ -97,48 +89,39 @@ async def _start(event):
         )
     await xnx.delete()
 
-
 @bot.on(
     events.NewMessage(incoming=True, pattern="^/about", func=lambda e: e.is_private)
 )
 async def _(e):
     await admin._about(e)
 
-
 @bot.on(events.callbackquery.CallbackQuery(data="slog"))
 async def _(e):
     await admin._logs(e)
-
 
 @bot.on(events.callbackquery.CallbackQuery(data="sret"))
 async def _(e):
     await admin._restart(e, schedule)
 
-
 @bot.on(events.callbackquery.CallbackQuery(data="entg"))
 async def _(e):
     await admin._encode_t(e)
-
 
 @bot.on(events.callbackquery.CallbackQuery(data="butg"))
 async def _(e):
     await admin._btn_t(e)
 
-
 @bot.on(events.callbackquery.CallbackQuery(data="scul"))
 async def _(e):
     await admin._sep_c_t(e)
-
 
 @bot.on(events.callbackquery.CallbackQuery(data="cast"))
 async def _(e):
     await admin.broadcast_bt(e)
 
-
 @bot.on(events.callbackquery.CallbackQuery(data="bek"))
 async def _(e):
     await e.edit(buttons=admin.admin_panel())
-
 
 async def anime(data):
     try:
@@ -196,9 +179,13 @@ async def anime(data):
     except BaseException:
         LOGS.error(str(format_exc()))
 
-
-try:
-    bot.loop.run_until_complete(subsplease.on_new_anime(anime))
-    bot.run()
-except KeyboardInterrupt:
-    subsplease._exit()
+if __name__ == "__main__":
+    # Start the health check server in a separate thread
+    server_thread = Thread(target=run_server)
+    server_thread.start()
+    
+    try:
+        bot.loop.run_until_complete(subsplease.on_new_anime(anime))
+        bot.run()
+    except KeyboardInterrupt:
+        subsplease._exit()
