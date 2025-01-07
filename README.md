@@ -1,12 +1,12 @@
-[![Stars](https://img.shields.io/github/stars/kaif-00z/AutoAnimeBot?style=flat-square&color=yellow)](https://github.com/kaif-00z/AutoAnimeBot/stargazers)
-[![Forks](https://img.shields.io/github/forks/kaif-00z/AutoAnimeBot?style=flat-square&color=orange)](https://github.com/kaif-00z/AutoAnimeBotfork)
+[![Stars](https://img.shields.io/github/stars/AYUSHRAJ5354n/New-one-?style=flat-square&color=yellow)](https://github.com/AYUSHRAJ5354n/New-one-/stargazers)
+[![Forks](https://img.shields.io/github/forks/AYUSHRAJ5354n/New-one-?style=flat-square&color=orange)](https://github.com/AYUSHRAJ5354n/New-one-/fork)
 [![Python](https://img.shields.io/badge/Python-v3.10.4-blue)](https://www.python.org/)
-[![CodeFactor](https://www.codefactor.io/repository/github/kaif-00z/autoanimebot/badge/main)](https://www.codefactor.io/repository/github/kaif-00z/autoanimebot/overview/main)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/kaif-00z/AutoAnimeBot/graphs/commit-activity)
-[![Contributors](https://img.shields.io/github/contributors/kaif-00z/AutoAnimeBot?style=flat-square&color=green)](https://github.com/kaif-00z/AutoAnimeBot/graphs/contributors)
+[![CodeFactor](https://www.codefactor.io/repository/github/AYUSHRAJ5354n/New-one-/badge/main)](https://www.codefactor.io/repository/github/AYUSHRAJ5354n/New-one-/overview/main)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/AYUSHRAJ5354n/New-one-/graphs/commit-activity)
+[![Contributors](https://img.shields.io/github/contributors/AYUSHRAJ5354n/New-one-?style=flat-square&color=green)](https://github.com/AYUSHRAJ5354n/New-one-/graphs/contributors)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
-[![License](https://img.shields.io/badge/license-GPLv3-blue)](https://github.com/kaif-00z/AutoAnimeBot/blob/main/LICENSE)   
-[![Sparkline](https://stars.medv.io/kaif-00z/AutoAnimeBot.svg)](https://stars.medv.io/kaif-00z/AutoAnimeBot)
+[![License](https://img.shields.io/badge/license-GPLv3-blue)](https://github.com/AYUSHRAJ5354n/New-one-/blob/main/LICENSE)   
+[![Sparkline](https://stars.medv.io/AYUSHRAJ5354n/New-one-.svg)](https://stars.medv.io/AYUSHRAJ5354n/New-one-)
 
 ## Changelog Of Latest Update
 
@@ -40,6 +40,7 @@
 - Try To Resove Any Task From ToDo List Or Raise A Issue!
 
 ## How to deploy?
+
 <p><a href="https://www.youtube.com/live/hWf7DN3nN_c"> <img src="https://img.shields.io/badge/See%20Video-black?style=for-the-badge&logo=YouTube" width="160""/></a></p>
 
 ### Fork Repo Then click on below button of ur fork repo.
@@ -91,9 +92,9 @@
 
 ## Deployment In VPS
 
-`git clone https://github.com/kaif-00z/AutoAnimeBot.git`
+`git clone https://github.com/AYUSHRAJ5354n/New-one-.git`
 
-`nano .env` configure env as per [this](https://github.com/kaif-00z/AutoAnimeBot/blob/main/.sample.env) or  using [this](https://github.com/kaif-00z/AutoAnimeBot/blob/main/auto_env_gen.py).
+`nano .env` configure env as per [this](https://github.com/AYUSHRAJ5354n/New-one-/blob/main/.sample.env) or  using [this](https://github.com/AYUSHRAJ5354n/New-one-/blob/main/auto_env_gen.py).
 
 `bash pkg.sh`
 
@@ -101,7 +102,7 @@
 
 ## Commands
 
-[![Comand](https://graph.org/file/ca8de14ba0b1d3b71af1f.jpg)](https://github.com/kaif-00z/AutoAnimeBot/)
+[![Comand](https://graph.org/file/ca8de14ba0b1d3b71af1f.jpg)](https://github.com/AYUSHRAJ5354n/New-one-/)
 
 **Uploading of Ongoing Animes Is Automatic**
 
