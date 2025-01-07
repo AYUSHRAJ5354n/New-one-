@@ -1,14 +1,17 @@
-FROM python:3.10-slim-buster
+# Use the official Python image from the Docker Hub
+FROM python:3.10-slim
 
-WORKDIR /usr/src/app
-RUN chmod 777 /usr/src/app
+# Set the working directory in the container
+WORKDIR /app
 
-RUN apt-get -qq update && apt-get -qq install -y git wget pv jq python3-dev mediainfo gcc aria2 libsm6 libxext6 libfontconfig1 libxrender1 libgl1-mesa-glx
+# Copy the requirements file into the container
+COPY requirements.txt requirements.txt
 
-COPY --from=mwader/static-ffmpeg:6.0 /ffmpeg /bin/ffmpeg
-COPY --from=mwader/static-ffmpeg:6.0 /ffprobe /bin/ffprobe
+# Install the dependencies
+RUN pip install -r requirements.txt
 
+# Copy the rest of the application code into the container
 COPY . .
-RUN pip3 install --no-cache-dir -r requirements.txt
 
-CMD ["bash","run.sh"]
+# Specify the command to run the application
+CMD ["gunicorn", "-c", "gunicorn_config.py", "app:app"]
