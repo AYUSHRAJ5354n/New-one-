@@ -68,7 +68,8 @@ class Executors:
             # Use ffmpeg to check resolution
             cmd = f"ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 {self.input_file}"
             result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-            print(result.stdout)  # Add this line to debug
+            print("stdout:", result.stdout)  # Add this line to debug
+            print("stderr:", result.stderr)  # Add this line to debug
             if result.stdout.strip():
                 width, height = map(int, result.stdout.strip().split('x'))
             else:
