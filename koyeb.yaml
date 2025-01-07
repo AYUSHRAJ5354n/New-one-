@@ -1,0 +1,29 @@
+name: new-one-app
+services:
+  - name: new-one-service
+    image: docker.io/library/python:3.10-slim-buster
+    instance:
+      type: nano
+    ports:
+      - name: http
+        port: 80
+    env:
+      - name: BOT_TOKEN
+        value: your-bot-token
+      - name: MONGO_SRV
+        value: your-mongo-srv
+      - name: MAIN_CHANNEL
+        value: your-main-channel-id
+      - name: CLOUD_CHANNEL
+        value: your-cloud-channel-id
+      - name: LOG_CHANNEL
+        value: your-log-channel-id
+      - name: OWNER
+        value: your-owner-id
+    build:
+      commands:
+        - apt-get -qq update && apt-get -qq install -y git wget pv jq python3-dev mediainfo gcc aria2 libsm6 libxext6 libfontconfig1 libxrender1 libgl1-mesa-glx
+        - chmod 777 /usr/src/app
+        - pip3 install --no-cache-dir -r requirements.txt
+    run:
+      command: bash run.sh
