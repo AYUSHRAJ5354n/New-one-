@@ -18,6 +18,8 @@
 # little bit inspired from pyUltroid.BaseClient
 
 import asyncio
+import os
+import subprocess
 import sys
 from logging import Logger
 from traceback import format_exc
@@ -117,6 +119,21 @@ class Bot(TelegramClient):
                 await self.pyro_client.connect()
             except ConnectionError:
                 pass
+        
+        # Check file size
+        if os.path.getsize(file) > 600 * 1024 * 1024:
+            self.logger.error("File size exceeds 600MB limit.")
+            return
+
+        # Use ffmpeg to check resolution
+        cmd = f"ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 {file}"
+        result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+        width, height = map(int, result.stdout.strip().split('x'))
+        
+        if width > 854 or height > 480:
+            self.logger.error("Resolution exceeds 480p limit.")
+            return
+
         post = await self.pyro_client.send_document(
             Var.BACKUP_CHANNEL if is_button else Var.MAIN_CHANNEL,
             file,
